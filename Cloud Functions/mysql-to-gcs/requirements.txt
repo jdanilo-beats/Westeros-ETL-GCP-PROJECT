@@ -1,0 +1,4 @@
+# package>=version
+#python-csv
+mysql-connector-python
+google-cloud-storage
