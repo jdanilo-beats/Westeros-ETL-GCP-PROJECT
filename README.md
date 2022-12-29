@@ -7,37 +7,47 @@ Westeros es una empresa ficticia con datos en una base de datos MySQL y un archi
 
 ![elt](./arquitectura.jpg)
 
-
+# Cloud Functions para el script en Python
 Empleando una arquitectura en Google Cloud Platform
 Se ha usado el servicio de Cloud Functions, el cual es un servicio serverless para crear las 2 funciones que permitan traer en formato .csv los archivos de la base de datos y la otra funcion para llevar estos archivos hacia BigQuery en la capa RAW.
 
 ![elt](CAPTURES/cloud-functions-2.jpg) 
 
+# Cloud Scheduler para orquestar y automatizar la ejecucion.
 Junto con Cloud Scheduler, se permite automatizar la ejecucion de las funciones en Cloud functions todos los dias a las 23:00 horas y generando menos gastos y facturará por el tiempo de ejecución de la función.
 
 
 ![elt](CAPTURES/cloud-scheduler.jpg)
 
+# Cloud Storage para almacenar archivos .csv
 Se ha usado el servicio Cloud Storage para almacenar los archivos .csv como un Datalake.
 
+![elt](CAPTURES/bucket.jpg) 
 
+# Uso de BigQuery
 Se ha usado el servicio de BigQuery para hacer el procesamiento, limpieza y desnormalizacion de las tablas por capas
-La ingesta se debe hacer todos los días a las 23:00 
-1)Consumir ambos orígenes y colocarlos en la capa raw
-2)Transferirlos a cada capa Raw, Quality Access
-3)En la capa stagging se debe desnormalizar las tablas para construir un tablon
-4)En la capa business se debe construir vistas que tendrán lógicas de negocios para extraer información de valor
-5)Construir tableros que consuman las vistas y devuelvan gráficos de interés
+La ingesta se debe hacer todos los días a las 23:00.
+
+1)Consumir ambos orígenes y colocarlos en la capa raw.
+
+2)Transferirlos a cada capa Raw, Quality Access.
+
+3)En la capa stagging se debe desnormalizar las tablas para construir un tablon.
+
+4)En la capa business se debe construir vistas que tendrán lógicas de negocios para extraer información de valor.
+
+5)Construir tableros que consuman las vistas y devuelvan gráficos de interés.
+
 
 ![elt](CAPTURES/bigquery2.jpg)
 
-
+# Consultas Programadas
 Se ha realizado la creacion de JOBS para realizar consultas programadas todos los dias a las 23:00 horas y de se pueda automatizar el procesamiento por capas en BigQuery
 
 ![elt](CAPTURES/bigquery.jpg)
 
-
-Finalmente se ha creado un dashobard usando Looker Studio para generar información sobre las ventas de Westeros. https://datastudio.google.com/s/r2sN0TkEY9w
+# Looker Studio
+Finalmente se ha creado un dashobard usando Looker Studio para generar información sobre las ventas por producto, total de ventas, porcentaje de cada tipo de producto, stock, ordenes por pais, para analizar indicadores clave que permitan mejorar la toma de decisiones en la empresa Westeros. https://datastudio.google.com/s/r2sN0TkEY9w
 
 ![elt](./DASHBOARD.jpg)
 
